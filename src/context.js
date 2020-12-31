@@ -9,17 +9,27 @@ function ContextProvider({children}) {
 
 const url = "https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json"
 
+
 useEffect(() => {
+    const randomNums = []
+    while(randomNums.length < 5) {
+        const newRandomInt = (Math.random() * 10) + 1;
+        if(randomNums.indexOf(newRandomInt) === -1) randomNums.push(newRandomInt)
+    }
+    const finalNum = randomNums.find(num => (num < 399))
+
     fetch(url)
     .then(res => res.json())
-    .then(data => setAllPhotos(data))
+    .then(data => {     
+        const dataWithPrice = data.map(item => { return {...item, price: parseFloat(finalNum)}})
+        setAllPhotos(dataWithPrice)
+    })
 }, [])
 
 function toggleFavorite(id) {
     const updatedArr = allPhotos.map(photo => {
         if(photo.id === id) {
-            console.log(id)
-            console.log(!photo.isFavorite)
+
             return {...photo, isFavorite: !photo.isFavorite}
         }
         return photo
@@ -35,9 +45,12 @@ function removeFromCart(id) {
     setCartItems(prevItems => prevItems.filter(item => item.id !== id))
     }
 
-console.log(cartItems)
+function emptyCart() {
+    setCartItems([])
+    }
 
-    return(<Context.Provider value={{allPhotos, toggleFavorite, addToCart, cartItems, removeFromCart}}>{children}</Context.Provider>)
+ 
+return(<Context.Provider value={{allPhotos, toggleFavorite, addToCart, cartItems, removeFromCart, emptyCart}}>{children}</Context.Provider>)
 }
 
 export { Context, ContextProvider }
