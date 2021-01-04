@@ -31,7 +31,7 @@ main.photos {
 }
 
 main.cart-page {
-  padding: 10px;
+  padding: 5rem 28rem;
 }
 
 .cart-page > h1 {
@@ -49,10 +49,14 @@ main.cart-page {
 }
 
 div.order-button > button {
-  border-color: #5f5d5d;
   cursor: pointer;
-  padding: 15px;
+  padding: 15px 50px;
   transition: all 0.2s ease-in-out;
+  background-color: #8ab3ab;
+  color: white;
+  font-size: large;
+  font-weight: bold;
+  border:none;
 }
 
 div.order-button > button:focus {
@@ -150,7 +154,7 @@ header {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  background-color: #6b7b78;
+  background-color: #1f4d44;
   color: var(--light-blue);
   padding: 0 25px;
   position: sticky;
@@ -162,4 +166,26 @@ header {
 
 a {
   text-decoration: none;
+}
+
+@media (max-width: 1200px) {
+  body {
+    margin: unset;
+  }
+  main.cart-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 0 0 0;
+    align-items: center;
+  }
+
+  .cart-item {
+    margin: 1rem auto;
+  }
+
+  .cart-item img {
+    margin-right: 2rem;
+  }
+
 }
